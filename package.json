@@ -22,6 +22,14 @@
     "dev": "tsup --watch",
     "prepublishOnly": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnkushGiri7/browser_hardware_access.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnkushGiri7/browser_hardware_access/issues"
+  },
+  "homepage": "https://github.com/AnkushGiri7/browser_hardware_access#readme",
   "devDependencies": {
     "@types/node": "^24.10.1",
     "tsup": "^8.5.1",
