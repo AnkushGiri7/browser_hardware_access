@@ -1,5 +1,7 @@
 **Browser\_hardware\_access:**
 
+**DEMO\_PROJECT** **:** https://ankushgiri7.github.io/demo_for_browser_hardware_access_package/
+
 **We are going to create a README.md file for the VKYC Hardware Permissions package.**
 
 **The README should include:**
