@@ -43,17 +43,19 @@ or
 yarn add browser_hardware_access
 ```
 ## <a name="_yn970khn1n2d"></a>**Quick Start**
-```
+```ts
 import { verifyAllPermissions, VKYCPermissionStatus } from 'browser_hardware_access';
+
 // Check all permissions at once
 const results = await verifyAllPermissions();
+
 if (results.IS_ALL_GRANTED) {
   console.log('All permissions granted! Ready for video verification.');
 } else {
   console.log('Some permissions missing:', {
-   camera: results.camera.IS_PERMISSION_ALLOWED,
-   microphone: results.mic.IS_PERMISSION_ALLOWED,
-   location: results.location.IS_PERMISSION_ALLOWED
+    camera: results.camera.IS_PERMISSION_ALLOWED,
+    microphone: results.mic.IS_PERMISSION_ALLOWED,
+    location: results.location.IS_PERMISSION_ALLOWED
   });
 }
 ```
@@ -61,7 +63,7 @@ if (results.IS_ALL_GRANTED) {
 ## <a name="_jg4wfhsmkrpf"></a><a name="_ve59plq9pqrz"></a><a name="_d6nk5lusg0jl"></a><a name="_8xg9vvfem7j2"></a><a name="_c8lw2wn4nvon"></a>**Core Concepts**
 **Permission States:**
 The library provides clear distinction between three permission states:
-```
+```ts
 import { VKYCPermissionStatus } from 'browser_hardware_access';
 // Three possible states:
 VKYCPermissionStatus.ALLOWED      // User explicitly granted permission
@@ -70,7 +72,7 @@ VKYCPermissionStatus.BLOCKED      // User permanently denied permission
 ```
 
 ## <a name="_jg4wfhsmkrpf"></a><a name="_ve59plq9pqrz"></a><a name="_d6nk5lusg0jl"></a><a name="_8xg9vvfem7j2"></a><a name="_c8lw2wn4nvon"></a>**Error Handling**
-```
+```ts
 import { VKYCErrorCode } from 'browser_hardware_access';
 
 VKYCErrorCode.PERMISSION_DENIED   // User denied permission
@@ -87,7 +89,7 @@ VKYCErrorCode.UNKNOWN_ERROR       // Other errors
 
 Requests camera permission and returns camera capabilities.
 
-```
+```ts
 import { requestCameraAccess, VKYCPermissionStatus } from 'browser_hardware_access';
 
 const result = await requestCameraAccess();
@@ -101,7 +103,7 @@ const result = await requestCameraAccess();
 #### <a name="_gwyf9dimvr7a"></a>**requestMicrophoneAccess()**
 
 Requests microphone permission and checks hardware availability.
-```
+```ts
 const result = await requestMicrophoneAccess();
 if (result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOWED) {
     console.log('Microphone access granted');
@@ -113,7 +115,7 @@ if (result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOWED) {
 #### <a name="_2qmz4aus8fw5"></a>**requestVideoAndMicAccess()**
 Requests both camera and microphone permissions simultaneously.
 
-```
+```ts
 const result = await requestVideoAndMicAccess();
 const canVideoCall = result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOWED && result.HAS_CAMERA && result.HAS_MICROPHONE;
 ```
@@ -121,7 +123,7 @@ const canVideoCall = result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOW
 #### <a name="_lup790s7wmti"></a>**requestLocationAccess()**
 Requests geolocation permission and returns coordinates.
 
-```
+```ts
 const result = await requestLocationAccess();
 if (result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOWED) {
     console.log(`Location: ${result.LATITUDE}, ${result.LONGITUDE}`);
@@ -132,7 +134,7 @@ if (result.IS_PERMISSION_ALLOWED === VKYCPermissionStatus.ALLOWED) {
 
 #### <a name="_y55biju5463q"></a>**checkNetworkStatus()**
 Checks network connectivity with optional speed test.
-```
+```ts
 // Basic check
 const network = await checkNetworkStatus();
 // With speed test
@@ -145,7 +147,7 @@ console.log({
 ```
 #### <a name="_w3ybiphspp0g"></a>**verifyAllPermissions()**
 Comprehensive check of all permissions in parallel.
-```
+```ts
   const allPermissions = await verifyAllPermissions(true);
 
   console.log('Camera:', allPermissions.camera.IS_PERMISSION_ALLOWED);
@@ -161,7 +163,7 @@ Comprehensive check of all permissions in parallel.
 ### <a name="_vhwkesrq9dpk"></a>**Utility Functions**
 #### <a name="_vh7k7gwq4otm"></a>**getPermissionStatusDescription()**
 Get human-readable permission status messages.
-```
+```ts
 import { getPermissionStatusDescription } from 'browser_hardware_access';
 const cameraResult = await requestCameraAccess();
 const description = getPermissionStatusDescription(cameraResult.IS_PERMISSION_ALLOWED);
@@ -172,7 +174,7 @@ const description = getPermissionStatusDescription(cameraResult.IS_PERMISSION_AL
 ## <a name="_n3wdw76f2e99"></a>**Complete Examples**
 ### <a name="_cxb20gcmre9a"></a>**Video Call Setup**
 
-```
+```ts
 import { requestVideoAndMicAccess , checkNetworkStatus , VKYCPermissionStatus } from 'browser_hardware_access';
 
 async function setupVideoCall() {
@@ -193,7 +195,7 @@ async function setupVideoCall() {
 ```
 
 ### <a name="_gqk0o336x3cy"></a>**Location Verification Flow**
-```
+```ts
 import { requestLocationAccess, VKYCPermissionStatus } from 'browser_hardware_access';
 
 async function verifyUserLocation() {
@@ -214,7 +216,7 @@ async function verifyUserLocation() {
 ```
 
 ### <a name="_mv7083ty199e"></a>**Comprehensive VKYC Check**
-```
+```ts
 import { verifyAllPermissions, VKYCPermissionStatus } from 'browser_hardware_access';
 
 async function performVKYCCheck() {
@@ -245,7 +247,7 @@ async function performVKYCCheck() {
 ```
 ## <a name="_c7h3pu8btslr"></a>**Response Interfaces**
 ## <a name="_g5u1u7fv32ns"></a>**Camera Result:**
-```
+```ts
 {
   IS_PERMISSION_ALLOWED: VKYCPermissionStatus;
   HAS_CAMERA: boolean;
@@ -256,7 +258,7 @@ async function performVKYCCheck() {
 }
 ```
 ### <a name="_m7bxq7fbi17f"></a>**Microphone Result:**
-```
+```ts
 {
   IS_PERMISSION_ALLOWED: VKYCPermissionStatus;
   HAS_MICROPHONE: boolean;
@@ -266,7 +268,7 @@ async function performVKYCCheck() {
 ```
 
 ### <a name="_djq8obbnbq4m"></a>**Location Result**
-```
+```ts
 {
   IS_PERMISSION_ALLOWED: VKYCPermissionStatus;
   LATITUDE: string;
@@ -278,7 +280,7 @@ async function performVKYCCheck() {
 
 
 ### <a name="_d43sb2ha50qu"></a>**Network Result**
-```
+```ts
 {
   IS_PERMISSION_ALLOWED: VKYCPermissionStatus; // Always ALLOWED for network
   IS_ONLINE: boolean;
@@ -291,7 +293,7 @@ async function performVKYCCheck() {
 }
 ```
 ### <a name="_d43sb2ha50qu"></a>**enum VKYCErrorCode**
-```
+```ts
 {
   PERMISSION_DENIED = "PERMISSION_DENIED",
   DEVICE_NOT_FOUND = "DEVICE_NOT_FOUND",
@@ -302,7 +304,7 @@ async function performVKYCCheck() {
 }
 ```
 ### <a name="_d43sb2ha50qu"></a>**enum VKYCPermissionStatus**
-```
+```ts
 {
   ALLOWED = "ALLOWED",
   NOT_ALLOWED = "NOT_ALLOWED",  // User dismissed/cancelled the prompt
