@@ -304,4 +304,4 @@ export {
   requestVideoAndMicAccess,
   verifyAllPermissions
 };
-//# sourceMappingURL=index.mjs.map
+//# sourceMappingURL=index.js.map
